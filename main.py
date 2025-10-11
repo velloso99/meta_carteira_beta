@@ -40,6 +40,11 @@ frame_baixo.grid(row=4, column=0, pady=0, padx=0, sticky=NSEW)
 t_titulo= Label(frame_cima, text=("Painel"), font=('Ivy 20 bold'), bg=co5, fg=co11)
 t_titulo.place(x=425, y=23, anchor=CENTER)
 
+
+
+
+
+
 #********************************************************************************************************
 #Botões
 
