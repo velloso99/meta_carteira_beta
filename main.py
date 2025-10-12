@@ -33,6 +33,28 @@ frame_meio.grid(row=2, column=0, pady=0, padx=0, sticky=NSEW)
 
 frame_baixo= Frame(janela, width=850, height=285, bg=co5)
 frame_baixo.grid(row=4, column=0, pady=0, padx=0, sticky=NSEW)
+#*******************************************************************************************************
+#Função de Controle
+def control(i):
+    #Cadastro de clientes
+    if i =='cadastro':
+        for widget in frame_cima.winfo_children():
+            widget.destroy()
+        for widget in frame_meio.winfo_children():
+            widget.destroy()
+        for widget in frame_baixo.winfo_children():
+            widget.destroy()
+        #chamar a função
+        cadastro()
+
+
+
+
+
+
+
+
+
 
 #*******************************************************************************************************
 #Titulo
@@ -48,7 +70,7 @@ t_titulo.place(x=425, y=23, anchor=CENTER)
 #********************************************************************************************************
 #Botões
 
-bt_Cadastro= Button(frame_meio, text="Cadastro", bd=3, bg=co8, fg=co11, font=('verdana 10 bold'))
+bt_Cadastro= Button(frame_meio,command=lambda:control('cadastro'), text="Cadastro", bd=3, bg=co8, fg=co11, font=('verdana 10 bold'))
 bt_Cadastro.place(x=10, y=10)
 
 bt_atualizar= Button(frame_meio, text="Atualizar", bd=3, bg=co8, fg=co11, font=('verdana 10 bold'))
@@ -61,9 +83,20 @@ bt_clientes.place(x=180, y=10)
 
 #******************************************************************************************************
 #Cadastro
+def cadastro():
 
+    t_titulo= Label(frame_cima, text=("Cadastro em Geral"), font=('Ivy 20 bold'), bg=co5, fg=co11)
+    t_titulo.place(x=425, y=23, anchor=CENTER)
 
+    
+    bt_Cadastro= Button(frame_meio, text="Cadastro Clientes", bd=3, bg=co8, fg=co11, font=('verdana 10 bold'))
+    bt_Cadastro.place(x=10, y=10)
 
+    bt_atualizar= Button(frame_meio, text="Cadastro Meta", bd=3, bg=co8, fg=co11, font=('verdana 10 bold'))
+    bt_atualizar.place(x=155, y=10)
+
+    bt_clientes= Button(frame_meio, text="Cadstro ", bd=3, bg=co8, fg=co11, font=('verdana 10 bold'))
+    bt_clientes.place(x=280, y=10)
 
 
 
