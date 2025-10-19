@@ -140,9 +140,20 @@ def cadastro_clientes():
     e_fantasia= Entry(frame_baixo, width=35, justify=LEFT, font=('Ivy 10 bold'),  relief='solid')
     e_fantasia.place(x=115, y=90)
 
+    l_endereco = Label(frame_baixo, text="Endereço:", font=('Ivy 10 bold'), bg=co9, fg=co11)
+    l_endereco.place(x=10, y=130)
+    e_endereco= Entry(frame_baixo, width=35, justify=LEFT, font=('Ivy 10 bold'),  relief='solid')
+    e_endereco.place(x=95, y=130)
 
+    l_bairro = Label(frame_baixo, text="Bairro:", font=('Ivy 10 bold'), bg=co9, fg=co11)
+    l_bairro.place(x=10, y=170)
+    e_bairro= Entry(frame_baixo, width=35, justify=LEFT, font=('Ivy 10 bold'),  relief='solid')
+    e_bairro.place(x=115, y=170)
 
-
+    l_ = Label(frame_baixo, text="Atendente:", font=('Ivy 10 bold'), bg=co9, fg=co11)
+    l_.place(x=10, y=210)
+    e_= Entry(frame_baixo, width=35, justify=LEFT, font=('Ivy 10 bold'),  relief='solid')
+    e_.place(x=95, y=210)
 
 
 
