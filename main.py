@@ -33,8 +33,13 @@ frame_meio.grid(row=2, column=0, pady=0, padx=0, sticky=NSEW)
 
 ttk.Separator(janela, orient=HORIZONTAL).grid(row=3, columnspan=1, ipadx=680 )
 
-frame_baixo= Frame(janela, width=850, height=285, bg=co9)
+frame_baixo= Frame(janela, width=850, height=260, bg=co9)
 frame_baixo.grid(row=4, column=0, pady=0, padx=0, sticky=NSEW)
+
+ttk.Separator(janela, orient=HORIZONTAL).grid(row=5, columnspan=1, ipadx=680 )
+
+frame_tabela= Frame(janela, width=850, height=260, bg=co9)
+frame_tabela.grid(row=6, column=0, pady=0, padx=0, sticky=NSEW)
 #*******************************************************************************************************
 #Função de Controle
 def control(i):
@@ -106,7 +111,7 @@ def cadastro():
     bt_atualizar= Button(frame_meio, text="Cadastro Meta", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_atualizar.grid(row=0, column=1)
 
-    bt_clientes= Button(frame_meio, text="Cadstro ", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_clientes= Button(frame_meio, text="Cadastro ", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_clientes.grid(row=0, column=2)
 
 #******************************************************************************************************
@@ -157,46 +162,38 @@ def cadastro_clientes():
 
 
     #Tabela Alunos
-def mostrar_lucro():
+    def mostrar_lucro():
     
-        app_nome = Label(frame_baixo, text="Registros de Rotas", height=1, pady=0, padx=0, relief="flat", anchor="center", font=('Ivy 10 bold'), bg=co1, fg=co4)
+        app_nome = Label(frame_tabela, text="Registros de Rotas", height=1, pady=0, padx=0, relief="flat", anchor="center", font=('Ivy 10 bold'), bg=co11, fg=co4)
         app_nome.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")  # Agora correto
         
         #CREATING A TREEVIEW WITH DUAL SCROLLBARS
-        list_header = ['id', 'Data', 'Valor de Rota', 'Km Rodado', 'Calculo', 'valor Combustivel', 'Total Combustivel', 'Total']
+        list_header = ['id', 'Matricula', 'Razão Social', 'Nome Fnatsia', 'Endereço', 'Bairro', 'Atendente']
         # Define the atualizar_lucro function
         def atualizar_lucro(lista):
             # Placeholder implementation for updating data
             # Replace this with actual database update logic
             print(f"Updating record with data: {lista}")
         
-        # Placeholder function for ver_lucro
-        def ver_lucro():
-            # Return a sample list of data for demonstration
-            return [
-                [1, "01/01/2023", 100.0, 50.0, 20.0, 5.0, 25.0, 75.0],
-                [2, "02/01/2023", 200.0, 100.0, 40.0, 10.0, 50.0, 150.0]
-            ]
-        
-        df_list = ver_lucro()
+        df_list = ()
         
         global tree_lucro
         
-        tree_lucro = ttk.Treeview(f_tabela, selectmode="extended", columns=list_header, show="headings")
+        tree_lucro = ttk.Treeview(frame_tabela, selectmode="extended", columns=list_header, show="headings")
         
         #VERTICAL SCROLLBAR
-        vsb = ttk.Scrollbar(f_tabela, orient="vertical", command=tree_lucro.yview)
+        vsb = ttk.Scrollbar(frame_tabela, orient="vertical", command=tree_lucro.yview)
         #HORIZONTAL SCROLLBAR
-        hsb = ttk.Scrollbar(f_tabela, orient="horizontal", command=tree_lucro.yview)
+        hsb = ttk.Scrollbar(frame_tabela, orient="horizontal", command=tree_lucro.yview)
         
         tree_lucro.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
         tree_lucro.grid(column=0, row=1, sticky='nsew')
         vsb.grid(column=1, row=1, sticky='ns')
         hsb.grid(column=0, row=2, sticky='ew')
-        f_tabela.grid_rowconfigure(0,weight=12)
+        frame_tabela.grid_rowconfigure(0,weight=12)
         
-        hd=["center","center","center","center","center","center","center","center","center"]  
-        h = [40, 100, 100, 130, 50, 160, 160, 100, 100]
+        hd=["center","center","nw","nw","nw","center","center"]  
+        h = [40, 100, 100, 130, 50, 160, 160]
         n=0
         
         for col in list_header:
@@ -208,7 +205,7 @@ def mostrar_lucro():
             
             for item in df_list:
                 tree_lucro.insert("", "end", values=item)
-mostrar_lucro()
+    mostrar_lucro()
 
 
 
