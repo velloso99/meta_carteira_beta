@@ -12,7 +12,7 @@ except sqlite3.Error as e:
 def cadastrar_clientes(i):
     with con:
         cur=con.cursor()
-        query = "INSERT INTO clintes(matricula,razao_social,nome_fantasia,endereco,bairro,atendente) vasues(?,?,?,?,?,?)"
+        query = "INSERT INTO clientes(matricula,razao_social,nome_fantasia,endereco,bairro,atendente) values(?,?,?,?,?,?)"
         cur.execute(query, i)
 ####################################################################
 #Ver Clientes
@@ -36,7 +36,7 @@ def atualizar_clientes(i):
 def deletar_clientes(i):
     with con:
         cur = con.cursor()
-        query = "DELETE FROM alunos WHERE id=?"
+        query = "DELETE FROM clientes WHERE id=?"
         cur.execute(query, i)
 
 

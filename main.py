@@ -62,9 +62,9 @@ def control(i):
         for widget in frame_baixo.winfo_children():
             widget.destroy()
         #chamar a função
-        cadastro_clientes()
+        adicionar_clientes()
     #voltar de clientes
-    if i =='cadastro clientes':
+    if i =='voltar cadastro':
         for widget in frame_cima.winfo_children():
             widget.destroy()
         for widget in frame_meio.winfo_children():
@@ -128,7 +128,7 @@ def cadastro():
 
 #******************************************************************************************************
 # Cadastrar Clientes
-def cadastro_clientes():
+def adicionar_clientes():
 
     def cad_clientes():
 
@@ -136,9 +136,10 @@ def cadastro_clientes():
         razaosocial = e_raz_social.get()
         nomefantasia = e_fantasia.get()
         endereco = e_endereco.get()
+        bairro = e_bairro.get()
         atendete = e_atendente.get()
 
-        lista=[matricula,razaosocial,nomefantasia,endereco,atendete]
+        lista=[matricula,razaosocial,nomefantasia,endereco,bairro,atendete]
         #verificando se os valores estão vazios
         for i in lista:
             if i == "":
@@ -153,29 +154,49 @@ def cadastro_clientes():
         e_raz_social.delete(0,END)
         e_fantasia.delete(0,END)
         e_endereco.delete(0,END)
+        e_bairro.delete(0,END)
         e_atendente.delete(0,END)
 
         #mostrando valores na tabela
         mostrar_clientes()
 
+    def del_clientes():
+        try:
+            tree_itens = tree_clientes.focus()
+            tree_dicionario = tree_clientes.item(tree_itens)
+            tree_lista = tree_dicionario['values']
+
+            valor_id = tree_lista[0]
+            #deletar dados no banco de dadsos
+            deletar_clientes([valor_id])
+
+            #mostrando menssagem
+            messagebox.showinfo('Sucesso', "Dados deletados com sucesso!")
+
+            #mostrando os valores na tabela
+            ver_clientes()
+        except IndexError:
+            messagebox.showerror('Erro', "Selecione os dados para serem exluidos!")
 
 
-
-
+    
     t_titulo= Label(frame_cima, text=("Cadastro Clientes"), font=('Ivy 20 bold'), bg=co9, fg=co11)
     t_titulo.place(x=425, y=23, anchor=CENTER)
 
-    bt_salvar= Button(frame_meio,command=cad_clientes(), text="Salvar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_salvar= Button(frame_meio,command=cad_clientes, text="Salvar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_salvar.grid(row=0, column=0)
 
     bt_atualizar= Button(frame_meio, text="Atualizar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_atualizar.grid(row=0, column=1)
 
-    bt_clientes= Button(frame_meio, text="Excluir", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_clientes= Button(frame_meio,command=del_clientes ,text="Excluir", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_clientes.grid(row=0, column=2) 
 
-    bt_voltar= Button(frame_meio, text="voltar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
-    bt_voltar.grid(row=0, column=2) 
+    bt_voltar= Button(frame_meio,command=lambda:control('voltar cadastro'), text="voltar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_voltar.grid(row=0, column=3) 
+
+    #########################################################################################################
+    
 
     l_matricula = Label(frame_baixo, text="Matricula:", font=('Ivy 10 bold'), bg=co9, fg=co11)
     l_matricula.place(x=10, y=10)
@@ -211,47 +232,47 @@ def cadastro_clientes():
     #Tabela Alunos
     def mostrar_clientes():
     
-        app_nome = Label(frame_tabela, text="Registros de Rotas", height=1, pady=0, padx=0, relief="flat", anchor="center", font=('Ivy 10 bold'), bg=co11, fg=co4)
+        app_nome = Label(frame_tabela, text="Registros de Clientes", height=1, pady=0, padx=0, relief="flat", anchor="center", font=('Ivy 10 bold'), bg=co11, fg=co4)
         app_nome.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")  # Agora correto
         
         #CREATING A TREEVIEW WITH DUAL SCROLLBARS
-        list_header = ['id', 'Matricula', 'Razão Social', 'Nome Fnatsia', 'Endereço', 'Bairro', 'Atendente']
-        # Define the atualizar_lucro function
-        def atualizar_lucro(lista):
+        list_header = ['id', 'Matricula', 'Razão Social', 'Nome Fantasia', 'Endereço', 'Bairro', 'Atendente']
+        # Define the atualizar_clientes function
+        def atualizar_clientes(lista):
             # Placeholder implementation for updating data
             # Replace this with actual database update logic
             print(f"Updating record with data: {lista}")
         
         df_list = ver_clientes()
         
-        global tree_lucro
+        global tree_clientes
         
-        tree_lucro = ttk.Treeview(frame_tabela, selectmode="extended", columns=list_header, show="headings")
+        tree_clientes = ttk.Treeview(frame_tabela, selectmode="extended", columns=list_header, show="headings")
         
         #VERTICAL SCROLLBAR
-        vsb = ttk.Scrollbar(frame_tabela, orient="vertical", command=tree_lucro.yview)
+        vsb = ttk.Scrollbar(frame_tabela, orient="vertical", command=tree_clientes.yview)
         #HORIZONTAL SCROLLBAR
-        hsb = ttk.Scrollbar(frame_tabela, orient="horizontal", command=tree_lucro.yview)
+        hsb = ttk.Scrollbar(frame_tabela, orient="horizontal", command=tree_clientes.yview)
         
-        tree_lucro.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-        tree_lucro.grid(column=0, row=1, sticky='nsew')
+        tree_clientes.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+        tree_clientes.grid(column=0, row=1, sticky='nsew')
         vsb.grid(column=1, row=1, sticky='ns')
         hsb.grid(column=0, row=2, sticky='ew')
         frame_tabela.grid_rowconfigure(0,weight=12)
         
         hd=["center","center","nw","nw","nw","center","center"]  
-        h = [40, 100, 100, 130, 50, 160, 160]
+        h = [40, 100, 100, 150, 50, 160, 160]
         n=0
         
         for col in list_header:
-            tree_lucro.heading(col, text=col.title(), anchor=NW)
+            tree_clientes.heading(col, text=col.title(), anchor=NW)
             #ADJUST THE COLUMN'S WIDTH TO THE HEADER STRING
-            tree_lucro.column(col, width=h[n], anchor=hd[n])
+            tree_clientes.column(col, width=h[n], anchor=hd[n])
             
             n+=1
             
             for item in df_list:
-                tree_lucro.insert("", "end", values=item)
+                tree_clientes.insert("", "end", values=item)
     mostrar_clientes()
 
 
