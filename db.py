@@ -13,7 +13,7 @@ try:
         cur = con.cursor()
         cur.execute("""
             CREATE TABLE IF NOT EXISTS clientes(
-                ID INTEREGER PRiMARY KEY AUTOINCREMENT,
+                ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 MATRICULA TEXT,
                 RAZAO_SOCIAL TEXT,
                 NOME_FANTASIA TEXT,

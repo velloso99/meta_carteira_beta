@@ -11,12 +11,33 @@ except sqlite3.Error as e:
 #Criando tabela cadastro de clientes
 def cadastrar_clientes(i):
     with con:
-        cur - con.cursor()
-        query = "INSERT INTO clintes()"
+        cur=con.cursor()
+        query = "INSERT INTO clintes(matricula,razao_social,nome_fantasia,endereco,bairro,atendente) vasues(?,?,?,?,?,?)"
         cur.execute(query, i)
-
-
-
+####################################################################
+#Ver Clientes
+def ver_clientes():
+    lista = []
+    with con:
+        cur = con.cursor()
+        cur.execute('SELECT * FROM clientes')
+        linha = cur.fetchall()
+        
+        for i in linha:
+            lista.append(i)
+    return lista 
+# Atualizar clients(update U)--------------------------------------------------
+def atualizar_clientes(i):
+    with con:
+        cur = con.cursor()
+        query = "UPDATE alunos SET name=?, cpf=?,genero=?, email=?, telefone=?, endereco=?,cep=?, bairro=?, municipio=?, tutor=?, data_nascimento=?, ano_letivo=?, foto=? WHERE id=?"
+        cur.execute(query, i)
+# Deletar clientes(deletar D)----------------------------------------------------
+def deletar_clientes(i):
+    with con:
+        cur = con.cursor()
+        query = "DELETE FROM alunos WHERE id=?"
+        cur.execute(query, i)
 
 
 

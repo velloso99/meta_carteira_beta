@@ -175,7 +175,7 @@ def cadastro_clientes():
             # Replace this with actual database update logic
             print(f"Updating record with data: {lista}")
         
-        df_list = ()
+        df_list = ver_clientes()
         
         global tree_lucro
         
