@@ -63,6 +63,18 @@ def control(i):
             widget.destroy()
         #chamar a função
         cadastro_clientes()
+    #voltar de clientes
+    if i =='cadastro clientes':
+        for widget in frame_cima.winfo_children():
+            widget.destroy()
+        for widget in frame_meio.winfo_children():
+            widget.destroy()
+        for widget in frame_baixo.winfo_children():
+            widget.destroy()
+        for widget in frame_tabela.winfo_children():
+            widget.destroy()
+        #chamar a função
+        cadastro()
 
 
 
@@ -118,17 +130,52 @@ def cadastro():
 # Cadastrar Clientes
 def cadastro_clientes():
 
+    def cad_clientes():
+
+        matricula= e_matricula.get()
+        razaosocial = e_raz_social.get()
+        nomefantasia = e_fantasia.get()
+        endereco = e_endereco.get()
+        atendete = e_atendente.get()
+
+        lista=[matricula,razaosocial,nomefantasia,endereco,atendete]
+        #verificando se os valores estão vazios
+        for i in lista:
+            if i == "":
+                messagebox.showerror('Erro', "Preencha todosos campos!")
+                return
+        #inserir dados
+        cadastrar_clientes(lista)
+        #mostrando menssagem de sucesso
+        messagebox.showinfo('Sucesso', "Os dados inseridos com sucesso!")
+
+        e_matricula.delete(0,END)
+        e_raz_social.delete(0,END)
+        e_fantasia.delete(0,END)
+        e_endereco.delete(0,END)
+        e_atendente.delete(0,END)
+
+        #mostrando valores na tabela
+        mostrar_clientes()
+
+
+
+
+
     t_titulo= Label(frame_cima, text=("Cadastro Clientes"), font=('Ivy 20 bold'), bg=co9, fg=co11)
     t_titulo.place(x=425, y=23, anchor=CENTER)
 
-    bt_Cadastro= Button(frame_meio, text="Salvar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
-    bt_Cadastro.grid(row=0, column=0)
+    bt_salvar= Button(frame_meio,command=cad_clientes(), text="Salvar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_salvar.grid(row=0, column=0)
 
     bt_atualizar= Button(frame_meio, text="Atualizar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_atualizar.grid(row=0, column=1)
 
     bt_clientes= Button(frame_meio, text="Excluir", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_clientes.grid(row=0, column=2) 
+
+    bt_voltar= Button(frame_meio, text="voltar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_voltar.grid(row=0, column=2) 
 
     l_matricula = Label(frame_baixo, text="Matricula:", font=('Ivy 10 bold'), bg=co9, fg=co11)
     l_matricula.place(x=10, y=10)
@@ -155,14 +202,14 @@ def cadastro_clientes():
     e_bairro= Entry(frame_baixo, width=35, justify=LEFT, font=('Ivy 10 bold'),  relief='solid')
     e_bairro.place(x=115, y=170)
 
-    l_ = Label(frame_baixo, text="Atendente:", font=('Ivy 10 bold'), bg=co9, fg=co11)
-    l_.place(x=10, y=210)
-    e_= Entry(frame_baixo, width=35, justify=LEFT, font=('Ivy 10 bold'),  relief='solid')
-    e_.place(x=95, y=210)
+    l_atendente= Label(frame_baixo, text="Atendente:", font=('Ivy 10 bold'), bg=co9, fg=co11)
+    l_atendente.place(x=10, y=210)
+    e_atendente= Entry(frame_baixo, width=35, justify=LEFT, font=('Ivy 10 bold'),  relief='solid')
+    e_atendente.place(x=95, y=210)
 
 
     #Tabela Alunos
-    def mostrar_lucro():
+    def mostrar_clientes():
     
         app_nome = Label(frame_tabela, text="Registros de Rotas", height=1, pady=0, padx=0, relief="flat", anchor="center", font=('Ivy 10 bold'), bg=co11, fg=co4)
         app_nome.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")  # Agora correto
@@ -205,7 +252,7 @@ def cadastro_clientes():
             
             for item in df_list:
                 tree_lucro.insert("", "end", values=item)
-    mostrar_lucro()
+    mostrar_clientes()
 
 
 
