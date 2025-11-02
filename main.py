@@ -229,8 +229,10 @@ def adicionar_clientes():
                     ver_clientes()
                     botao_update.destroy()
 
-                botao_update = Button(frame_meio, command=update, anchor=CENTER, text= 'Salvar e Atualizar'.upper(), width=18, overrelief=RIDGE, font=('Ivy 10') bg=co3, fg=co1)
+                botao_update = Button(frame_meio, command=update, anchor=CENTER, text= 'Salvar e Atualizar'.upper(), width=18, overrelief=RIDGE, font=('Ivy 10'), bg=co3, fg=co1)
                 botao_update.grid(row=0, column=3)
+        except IndexError:
+            messagebox.showerror('Erro', 'Secelione um dos dados na tabela')    
 
 
 
@@ -241,7 +243,7 @@ def adicionar_clientes():
     bt_salvar= Button(frame_meio,command=cad_clientes, text="Salvar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_salvar.grid(row=0, column=0)
 
-    bt_atualizar= Button(frame_meio, text="Atualizar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_atualizar= Button(frame_meio,command=update_login ,text="Atualizar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_atualizar.grid(row=0, column=1)
 
     bt_clientes= Button(frame_meio,command=del_clientes ,text="Excluir", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
