@@ -190,6 +190,48 @@ def adicionar_clientes():
             e_bairro.delete(0,END)
             e_atendente.delete(0,END)
 
+            e_matricula.insert(0, tree_lista[1])
+            e_raz_social.insert(0, tree_lista[2])
+            e_fantasia.insert(0, tree_lista[3])
+            e_endereco.insert(0, tree_lista[4])
+            e_bairro.insert(0, tree_lista[5])
+            e_atendente.insert(0, tree_lista[6])
+
+            def update():
+
+                matricula= e_matricula.get().strip()
+                razaosocial = e_raz_social.get().strip()
+                nomefantasia = e_fantasia.get().strip()
+                endereco = e_endereco.get().strip()
+                bairro = e_bairro.get().strip()
+                atendete = e_atendente.get().strip()
+
+                lista=[matricula,razaosocial,nomefantasia,endereco,bairro,atendete, valor_id]
+
+                #verificando caso algum campo estaja vazio
+                for i in lista:
+                    if i =='':
+                        messagebox.showerror( 'Erro', 'Preencha tods os campos!') 
+                        return
+                    atualizar_clientes(lista)
+                    #Mostrando a menssagem de sucesso
+                    messagebox.showinfo('Sucesso', 'Os Dados atualizados com sucesso!')
+
+                    #Limpa dados
+                    e_matricula.delete(0,END)
+                    e_raz_social.delete(0,END)
+                    e_fantasia.delete(0,END)
+                    e_endereco.delete(0,END)
+                    e_bairro.delete(0,END)
+                    e_atendente.delete(0,END)
+
+                    #chama a função que exibe os dados atualizados(se Existir)
+                    ver_clientes()
+                    botao_update.destroy()
+
+                botao_update = Button(frame_meio, command=update, anchor=CENTER, text= 'Salvar e Atualizar'.upper(), width=18, overrelief=RIDGE, font=('Ivy 10') bg=co3, fg=co1)
+                botao_update.grid(row=0, column=3)
+
 
 
     
@@ -206,7 +248,7 @@ def adicionar_clientes():
     bt_clientes.grid(row=0, column=2) 
 
     bt_voltar= Button(frame_meio,command=lambda:control('voltar cadastro'), text="voltar", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
-    bt_voltar.grid(row=0, column=3) 
+    bt_voltar.grid(row=0, column=4) 
 
     #########################################################################################################
     
