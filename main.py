@@ -75,7 +75,7 @@ def control(i):
             widget.destroy()
         #chamar a função
         cadastro()
-
+    
 
 
 
@@ -85,15 +85,11 @@ def control(i):
 
 
 #*******************************************************************************************************
+
 #Titulo
 
 t_titulo= Label(frame_cima, text=("Painel"), font=('Ivy 20 bold'), bg=co9, fg=co11)
 t_titulo.place(x=425, y=23, anchor=CENTER)
-
-
-
-
-
 
 #********************************************************************************************************
 #Botões
@@ -125,6 +121,7 @@ def cadastro():
 
     bt_clientes= Button(frame_meio, text="Cadastro ", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_clientes.grid(row=0, column=2)
+
 
 #******************************************************************************************************
 # Cadastrar Clientes
@@ -177,6 +174,22 @@ def adicionar_clientes():
             ver_clientes()
         except IndexError:
             messagebox.showerror('Erro', "Selecione os dados para serem exluidos!")
+
+    def update_login():
+        try:
+            tree_item = tree_clientes.focus()
+            tree_dicionario = tree_clientes.item(tree_item)
+            tree_lista = tree_dicionario['values']
+
+            valor_id = tree_lista[0]
+
+            e_matricula.delete(0,END)
+            e_raz_social.delete(0,END)
+            e_fantasia.delete(0,END)
+            e_endereco.delete(0,END)
+            e_bairro.delete(0,END)
+            e_atendente.delete(0,END)
+
 
 
     
