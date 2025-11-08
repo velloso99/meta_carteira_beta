@@ -40,6 +40,13 @@ def deletar_clientes(i):
         cur.execute(query, i)
 
 ####################################################################
+#Criando tabela cadastro de clientes
+def cadastrar_clientes_p(i):
+    with con:
+        cur=con.cursor()
+        query = "INSERT INTO clientes(clientes, positivados, nao_positivados) values(?,?,?)"
+        cur.execute(query, i)
+
 def ver_clientes_p():
     lista = []
     with con:
@@ -55,4 +62,10 @@ def atualizar_clientes_p(i):
     with con:
         cur = con.cursor()
         query = "UPDATE positivacao SET clientes=?, positivados=?, nao_positivados=? WHERE id=?"
+        cur.execute(query, i)
+# Deletar clientes(deletar D)----------------------------------------------------
+def deletar_clientes_p(i):
+    with con:
+        cur = con.cursor()
+        query = "DELETE FROM positivacao WHERE id=?"
         cur.execute(query, i)
