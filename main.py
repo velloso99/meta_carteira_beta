@@ -75,7 +75,16 @@ def control(i):
             widget.destroy()
         #chamar a função
         cadastro()
-    
+    #Positvações
+    if i =='positvação':
+        for widget in frame_cima.winfo_children():
+            widget.destroy()
+        for widget in frame_meio.winfo_children():
+            widget.destroy()
+        for widget in frame_baixo.winfo_children():
+            widget.destroy()
+        #chamar a função
+        positvacao()
 
 
 
@@ -116,7 +125,7 @@ def cadastro():
     bt_Cadastro= Button(frame_meio, command=lambda:control('cadastro clientes'), text="Cadastro Clientes", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_Cadastro.grid(row=0, column=0)
 
-    bt_atualizar= Button(frame_meio, text=" Meta", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_atualizar= Button(frame_meio, command=lambda:control('positvação'), text=" positivação", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_atualizar.grid(row=0, column=1)
 
     bt_clientes= Button(frame_meio, text="Cadastro ", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
@@ -334,8 +343,21 @@ def adicionar_clientes():
 
 
 #******************************************************************************************************
-def metas():
-    pass
+def positvacao():
+
+    t_titulo= Label(frame_cima, text=("Clientes Positvados"), font=('Ivy 20 bold'), bg=co9, fg=co11)
+    t_titulo.place(x=425, y=23, anchor=CENTER)
+
+    
+    bt_Cadastro= Button(frame_meio, command=lambda:control('#'), text=" Clientes Positvados", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_Cadastro.grid(row=0, column=0)
+
+    bt_atualizar= Button(frame_meio, text=" Meta", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_atualizar.grid(row=0, column=1)
+
+    bt_clientes= Button(frame_meio, text="Cadastro ", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_clientes.grid(row=0, column=2)
+    
 
 
 
