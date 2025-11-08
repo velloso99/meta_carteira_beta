@@ -24,3 +24,18 @@ try:
         print("Tabela de clientes criado com sucesso!")
 except sqlite3.Error as e:
     print("Erro ao criar a tabela de clientes", e)
+
+##################################################################
+try:
+    with con:
+        cur = con.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS positivacao(
+                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Clientes TEXT,
+                Positivados TEXT,
+                Nao_positivados TEXT
+            )""")
+        print("Tabela de positivações criado com sucesso!")
+except sqlite3.Error as e:
+    print("Erro ao criar a tabela de positivações", e)

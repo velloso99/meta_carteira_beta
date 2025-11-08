@@ -30,7 +30,7 @@ def ver_clientes():
 def atualizar_clientes(i):
     with con:
         cur = con.cursor()
-        query = "UPDATE alunos SET name=?, cpf=?,genero=?, email=?, telefone=?, endereco=?,cep=?, bairro=?, municipio=?, tutor=?, data_nascimento=?, ano_letivo=?, foto=? WHERE id=?"
+        query = "UPDATE clientes SET RAZAO_SOCIAL=?, NOME_FANTASIA=?, ENDERECO=?, BAIRRO=?, ATENDENTE=? WHERE id=?"
         cur.execute(query, i)
 # Deletar clientes(deletar D)----------------------------------------------------
 def deletar_clientes(i):
@@ -39,5 +39,20 @@ def deletar_clientes(i):
         query = "DELETE FROM clientes WHERE id=?"
         cur.execute(query, i)
 
-
-
+####################################################################
+def ver_clientes_p():
+    lista = []
+    with con:
+        cur = con.cursor()
+        cur.execute('SELECT * FROM positvacao')
+        linha = cur.fetchall()
+        
+        for i in linha:
+            lista.append(i)
+    return lista 
+# Atualizar clients(update U)--------------------------------------------------
+def atualizar_clientes_p(i):
+    with con:
+        cur = con.cursor()
+        query = "UPDATE positivacao SET clientes=?, positivados=?, nao_positivados=? WHERE id=?"
+        cur.execute(query, i)

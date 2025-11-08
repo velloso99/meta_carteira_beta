@@ -4,7 +4,7 @@ from templats import *
 #*******************************************************
 #Crinado Janelas
 janela = Tk()
-janela.title('')
+janela.title('Farias')
 janela.geometry('850x620')
 janela.configure(background= co4)
 janela.resizable(FALSE,FALSE)
@@ -116,7 +116,7 @@ def cadastro():
     bt_Cadastro= Button(frame_meio, command=lambda:control('cadastro clientes'), text="Cadastro Clientes", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_Cadastro.grid(row=0, column=0)
 
-    bt_atualizar= Button(frame_meio, text="Cadastro Meta", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
+    bt_atualizar= Button(frame_meio, text=" Meta", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
     bt_atualizar.grid(row=0, column=1)
 
     bt_clientes= Button(frame_meio, text="Cadastro ", bd=3, bg=co9, fg=co11, font=('verdana 10 bold'))
@@ -331,6 +331,29 @@ def adicionar_clientes():
             for item in df_list:
                 tree_clientes.insert("", "end", values=item)
     mostrar_clientes()
+
+
+#******************************************************************************************************
+def metas():
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
