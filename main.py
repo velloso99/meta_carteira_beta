@@ -297,48 +297,50 @@ def adicionar_clientes():
 
     #Tabela Alunos
     def mostrar_clientes():
-    
-        app_nome = Label(frame_tabela, text="Registros de Clientes", height=1, pady=0, padx=0, relief="flat", anchor="center", font=('Ivy 10 bold'), bg=co11, fg=co4)
-        app_nome.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")  # Agora correto
-        
-        #CREATING A TREEVIEW WITH DUAL SCROLLBARS
+
+        # Título
+        app_nome = Label(
+            frame_tabela, text="Registros de Clientes", height=1, pady=0, padx=0, relief="flat", anchor="center", font=('Ivy 10 bold'), bg=co11, fg=co4)
+        app_nome.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")
+
+        # Cabeçalhos da tabela
         list_header = ['id', 'Matricula', 'Razão Social', 'Nome Fantasia', 'Endereço', 'Bairro', 'Atendente']
-        # Define the atualizar_clientes function
-        def atualizar_clientes(lista):
-            # Placeholder implementation for updating data
-            # Replace this with actual database update logic
-            print(f"Updating record with data: {lista}")
-        
+
         df_list = ver_clientes()
-        
+
         global tree_clientes
-        
-        tree_clientes = ttk.Treeview(frame_tabela, selectmode="extended", columns=list_header, show="headings")
-        
-        #VERTICAL SCROLLBAR
+
+        # Criando Treeview
+        tree_clientes = ttk.Treeview(
+            frame_tabela,
+            selectmode="extended",
+            columns=list_header,
+            show="headings"
+        )
+
+        # Scrollbars
         vsb = ttk.Scrollbar(frame_tabela, orient="vertical", command=tree_clientes.yview)
-        #HORIZONTAL SCROLLBAR
-        hsb = ttk.Scrollbar(frame_tabela, orient="horizontal", command=tree_clientes.yview)
-        
+        hsb = ttk.Scrollbar(frame_tabela, orient="horizontal", command=tree_clientes.xview)
+
         tree_clientes.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+
         tree_clientes.grid(column=0, row=1, sticky='nsew')
         vsb.grid(column=1, row=1, sticky='ns')
         hsb.grid(column=0, row=2, sticky='ew')
-        frame_tabela.grid_rowconfigure(0,weight=12)
-        
-        hd=["center","center","nw","nw","nw","center","center"]  
-        h = [40, 100, 100, 150, 50, 160, 160]
-        n=0
-        
-        for col in list_header:
-            tree_clientes.heading(col, text=col.title(), anchor=NW)
-            #ADJUST THE COLUMN'S WIDTH TO THE HEADER STRING
-            tree_clientes.column(col, width=h[n], anchor=hd[n])
-            
-            n+=1
-            
-            for item in df_list:
-                tree_clientes.insert("", "end", values=item)
+
+        frame_tabela.grid_rowconfigure(0, weight=12)
+
+        # Ajuste das colunas
+        hd = ["center", "center", "nw", "nw", "nw", "center", "center"]
+        h =  [40, 100,   150,       150,     150,     100,      100]
+
+        for i, col in enumerate(list_header):
+            tree_clientes.heading(col, text=col, anchor=NW)
+            tree_clientes.column(col, width=h[i], anchor=hd[i])
+
+        # Inserção dos registros — CORRETO
+        for item in df_list:
+            tree_clientes.insert("", "end", values=item)
     mostrar_clientes()
 
 
